@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Java-SSL-Client-Server-Connection:jar">
+    <output-path>$USER_HOME$/Desktop</output-path>
+    <root id="archive" name="Java-SSL-Client-Server-Connection.jar">
+      <element id="module-output" name="Java-SSL-Client-Server-Connection" />
+    </root>
+  </artifact>
+</component>

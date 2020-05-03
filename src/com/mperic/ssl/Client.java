@@ -1,6 +1,5 @@
 package com.mperic.ssl;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.*;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 import java.util.Scanner;
@@ -9,7 +8,7 @@ public class Client
 {
     public static void main(String args[])
     {
-        int port = 35786;
+        int port = 1818;
         String host = "localhost";
         System.setProperty("javax.net.ssl.trustStore","myTrustStore.jts");
         System.setProperty("javax.net.ssl.trustStorePassword","123456");
@@ -17,17 +16,17 @@ public class Client
         {
             SSLSocketFactory sslsocketfactory = (SSLSocketFactory)SSLSocketFactory.getDefault();
             SSLSocket sslSocket = (SSLSocket)sslsocketfactory.createSocket(host, port);
-            DataOutputStream outputStream = new DataOutputStream(sslSocket.getOutputStream());
-            DataInputStream inputStream = new DataInputStream(sslSocket.getInputStream());
-            System.out.println(inputStream.readUTF());
+            PrintWriter output = new PrintWriter(sslSocket.getOutputStream(), true);
+            BufferedReader input = new BufferedReader(new InputStreamReader(sslSocket.getInputStream()));
+            System.out.println(input.readLine());
 
             Scanner s = new Scanner(System.in);
             while (true)
             {
-                System.out.println("- ");
+                System.out.println(":");
                 String messageToSend = s.nextLine();
-                outputStream.writeUTF(messageToSend);
-                System.err.println(inputStream.readUTF());
+                output.println(messageToSend);
+                System.err.println(input.readLine());
                 if(messageToSend.equals("close"))
                 {
                     break;
